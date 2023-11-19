@@ -101,7 +101,7 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jPanel1" min="-2" pref="277" max="-2" attributes="0"/>
+                          <Component id="pnlKosar" min="-2" pref="277" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -130,7 +130,7 @@
                       <Group type="102" attributes="0">
                           <Component id="pnlJegyek" min="-2" max="-2" attributes="0"/>
                           <EmptySpace pref="19" max="32767" attributes="0"/>
-                          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                          <Component id="pnlKosar" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -813,7 +813,7 @@
             <Property name="text" type="java.lang.String" value="Ft"/>
           </Properties>
         </Component>
-        <Container class="javax.swing.JPanel" name="jPanel1">
+        <Container class="javax.swing.JPanel" name="pnlKosar">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
