@@ -15,12 +15,17 @@ public class KoncertJegy extends javax.swing.JFrame {
     int jegyAlapar = 1;
     double helySzorzo, vegsoAr;
     int extrak, db;
+    String koncert = "";
+    int extraBelepesAr=0;
+    String extraBelepes="";
+    String nevExtrak="";
     
     public KoncertJegy() {
         initComponents();
         
         helySzorzo = 1;
         jegyAlapar = 0;
+        
     }
 
     
@@ -63,6 +68,9 @@ public class KoncertJegy extends javax.swing.JFrame {
         rbtnIgen = new javax.swing.JRadioButton();
         rbtnNem = new javax.swing.JRadioButton();
         lblLink = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("KoncertjegyVásárlás");
@@ -72,10 +80,12 @@ public class KoncertJegy extends javax.swing.JFrame {
 
         pnlJegyek.setBackground(new java.awt.Color(0, 0, 0));
 
+        lblHely.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
         lblHely.setForeground(new java.awt.Color(255, 255, 255));
         lblHely.setText("Helyjegyek:");
 
         buttonGroup1.add(rbtnKuzdoter);
+        rbtnKuzdoter.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         rbtnKuzdoter.setForeground(new java.awt.Color(255, 255, 255));
         rbtnKuzdoter.setText("Küzdőtér");
         rbtnKuzdoter.addItemListener(new java.awt.event.ItemListener() {
@@ -85,6 +95,7 @@ public class KoncertJegy extends javax.swing.JFrame {
         });
 
         buttonGroup1.add(rbtnVip);
+        rbtnVip.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         rbtnVip.setForeground(new java.awt.Color(255, 255, 255));
         rbtnVip.setText("VIP lelátó");
         rbtnVip.addItemListener(new java.awt.event.ItemListener() {
@@ -94,6 +105,7 @@ public class KoncertJegy extends javax.swing.JFrame {
         });
 
         buttonGroup1.add(rbtnJterasz);
+        rbtnJterasz.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         rbtnJterasz.setForeground(new java.awt.Color(255, 255, 255));
         rbtnJterasz.setText("Jobb terasz");
         rbtnJterasz.addItemListener(new java.awt.event.ItemListener() {
@@ -103,6 +115,7 @@ public class KoncertJegy extends javax.swing.JFrame {
         });
 
         buttonGroup1.add(rbtnBterasz);
+        rbtnBterasz.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         rbtnBterasz.setForeground(new java.awt.Color(255, 255, 255));
         rbtnBterasz.setText("Bal terasz");
         rbtnBterasz.addItemListener(new java.awt.event.ItemListener() {
@@ -118,25 +131,23 @@ public class KoncertJegy extends javax.swing.JFrame {
             .addGroup(pnlJegyekLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlJegyekLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlJegyekLayout.createSequentialGroup()
-                        .addComponent(lblHely)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlJegyekLayout.createSequentialGroup()
-                        .addGroup(pnlJegyekLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rbtnKuzdoter)
-                            .addComponent(rbtnVip))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                        .addGroup(pnlJegyekLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rbtnBterasz)
-                            .addComponent(rbtnJterasz))
-                        .addGap(41, 41, 41))))
+                    .addComponent(rbtnKuzdoter)
+                    .addComponent(rbtnVip))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGroup(pnlJegyekLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rbtnBterasz)
+                    .addComponent(rbtnJterasz))
+                .addGap(41, 41, 41))
+            .addGroup(pnlJegyekLayout.createSequentialGroup()
+                .addComponent(lblHely)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         pnlJegyekLayout.setVerticalGroup(
             pnlJegyekLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlJegyekLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addContainerGap()
                 .addComponent(lblHely)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(pnlJegyekLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rbtnKuzdoter)
                     .addComponent(rbtnJterasz))
@@ -150,7 +161,7 @@ public class KoncertJegy extends javax.swing.JFrame {
         pnlKoncertek.setBackground(new java.awt.Color(0, 0, 0));
         pnlKoncertek.setToolTipText("");
 
-        cmbxKoncert.setFont(new java.awt.Font("Maiandra GD", 0, 12)); // NOI18N
+        cmbxKoncert.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         cmbxKoncert.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- Válasszon Koncertet! -", "11. 20. - Hakumba", "11. 21. - Analóg Balaton", "11. 22. - Ivan & the Parazol", "11. 23. - Fiúk", "11. 24. - Csakneked Kislány", "11. 25. - Bohémian Betyars", "11. 26. - Hiperkarma" }));
         cmbxKoncert.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -163,10 +174,11 @@ public class KoncertJegy extends javax.swing.JFrame {
             }
         });
 
-        lblKoncertek.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 14)); // NOI18N
+        lblKoncertek.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
         lblKoncertek.setForeground(new java.awt.Color(255, 255, 255));
         lblKoncertek.setText("Közelgő koncertek:");
 
+        lblMennyiseg.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         lblMennyiseg.setForeground(new java.awt.Color(255, 255, 255));
         lblMennyiseg.setText("Jegyek mennyisége:");
 
@@ -181,18 +193,19 @@ public class KoncertJegy extends javax.swing.JFrame {
         pnlKoncertek.setLayout(pnlKoncertekLayout);
         pnlKoncertekLayout.setHorizontalGroup(
             pnlKoncertekLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlKoncertekLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlKoncertekLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlKoncertekLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmbxKoncert, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlKoncertekLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblKoncertek, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlKoncertekLayout.createSequentialGroup()
-                        .addComponent(lblKoncertek)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(pnlKoncertekLayout.createSequentialGroup()
-                        .addComponent(lblMennyiseg)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                        .addComponent(spnrMennyiseg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addGap(0, 14, Short.MAX_VALUE)
+                        .addGroup(pnlKoncertekLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(pnlKoncertekLayout.createSequentialGroup()
+                                .addComponent(lblMennyiseg)
+                                .addGap(18, 18, 18)
+                                .addComponent(spnrMennyiseg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmbxKoncert, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(14, 14, 14))
         );
         pnlKoncertekLayout.setVerticalGroup(
             pnlKoncertekLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,15 +221,17 @@ public class KoncertJegy extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        lblKosar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblKosar.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
         lblKosar.setForeground(new java.awt.Color(255, 255, 255));
         lblKosar.setText("Kosaram:");
 
         pnlExtrak.setBackground(new java.awt.Color(0, 0, 0));
 
+        jLabel8.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Extrák:");
 
+        cbxBar.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         cbxBar.setForeground(new java.awt.Color(255, 255, 255));
         cbxBar.setText("Korlátlan fogyasztás a bárban (18+)");
         cbxBar.setEnabled(false);
@@ -226,13 +241,21 @@ public class KoncertJegy extends javax.swing.JFrame {
             }
         });
 
+        cbxAfterparty.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         cbxAfterparty.setForeground(new java.awt.Color(255, 255, 255));
         cbxAfterparty.setText("AfterParty részvétel (18+)");
         cbxAfterparty.setEnabled(false);
 
+        cbxBelepes.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         cbxBelepes.setForeground(new java.awt.Color(255, 255, 255));
         cbxBelepes.setText("Belépés kapunyitás előtt");
+        cbxBelepes.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxBelepesItemStateChanged(evt);
+            }
+        });
 
+        cbxBeszelgetes.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         cbxBeszelgetes.setForeground(new java.awt.Color(255, 255, 255));
         cbxBeszelgetes.setText("Rövid beszélgetés a zenekarokkal");
 
@@ -243,16 +266,15 @@ public class KoncertJegy extends javax.swing.JFrame {
             .addGroup(pnlExtrakLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlExtrakLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
                     .addGroup(pnlExtrakLayout.createSequentialGroup()
-                        .addComponent(cbxBeszelgetes)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(pnlExtrakLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
                         .addGroup(pnlExtrakLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbxBeszelgetes)
                             .addComponent(cbxBelepes)
                             .addComponent(cbxBar)
-                            .addComponent(cbxAfterparty)
-                            .addComponent(jLabel8))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(cbxAfterparty))))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         pnlExtrakLayout.setVerticalGroup(
             pnlExtrakLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,6 +292,7 @@ public class KoncertJegy extends javax.swing.JFrame {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
+        jbtnMegveszem.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         jbtnMegveszem.setText("Megveszem");
         jbtnMegveszem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -277,6 +300,7 @@ public class KoncertJegy extends javax.swing.JFrame {
             }
         });
 
+        jbtnMegse.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         jbtnMegse.setText("Mégse");
         jbtnMegse.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -333,10 +357,12 @@ public class KoncertJegy extends javax.swing.JFrame {
         pnlElmult.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
         lblElmult.setBackground(new java.awt.Color(255, 255, 255));
+        lblElmult.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         lblElmult.setForeground(new java.awt.Color(255, 255, 255));
         lblElmult.setText("Elmúltál már 18 éves?");
 
         buttonGroup2.add(rbtnIgen);
+        rbtnIgen.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         rbtnIgen.setForeground(new java.awt.Color(255, 255, 255));
         rbtnIgen.setText("Igen");
         rbtnIgen.addItemListener(new java.awt.event.ItemListener() {
@@ -346,6 +372,7 @@ public class KoncertJegy extends javax.swing.JFrame {
         });
 
         buttonGroup2.add(rbtnNem);
+        rbtnNem.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         rbtnNem.setForeground(new java.awt.Color(255, 255, 255));
         rbtnNem.setSelected(true);
         rbtnNem.setText("Nem");
@@ -360,13 +387,13 @@ public class KoncertJegy extends javax.swing.JFrame {
         pnlElmultLayout.setHorizontalGroup(
             pnlElmultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlElmultLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addComponent(lblElmult)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rbtnIgen)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rbtnNem)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlElmultLayout.setVerticalGroup(
             pnlElmultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -399,6 +426,16 @@ public class KoncertJegy extends javax.swing.JFrame {
         lblLink.setForeground(new java.awt.Color(255, 255, 255));
         lblLink.setText("További információ a szabályzatunkról");
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Végösszeg: ");
+
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("0");
+
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Ft");
+
         javax.swing.GroupLayout pnlFeketeLayout = new javax.swing.GroupLayout(pnlFekete);
         pnlFekete.setLayout(pnlFeketeLayout);
         pnlFeketeLayout.setHorizontalGroup(
@@ -412,25 +449,29 @@ public class KoncertJegy extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlFeketeLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pnlExtrak, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblLink)
+                            .addComponent(pnlKoncertek, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlFeketeLayout.createSequentialGroup()
-                                .addComponent(lblLink)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jbtnMegveszem)
-                                .addGap(26, 26, 26)
-                                .addComponent(jbtnMegse)
-                                .addGap(33, 33, 33))
+                                .addGap(54, 54, 54)
+                                .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jbtnMegveszem)
+                                    .addComponent(jLabel1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(pnlFeketeLayout.createSequentialGroup()
-                                .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(pnlExtrak, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(pnlFeketeLayout.createSequentialGroup()
-                                        .addComponent(pnlKoncertek, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(78, 78, 78)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(pnlJegyek, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblKosar))
-                                .addGap(0, 15, Short.MAX_VALUE)))))
+                                .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jbtnMegse)
+                                    .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(pnlJegyek, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblKosar)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         pnlFeketeLayout.setVerticalGroup(
@@ -444,24 +485,32 @@ public class KoncertJegy extends javax.swing.JFrame {
                 .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pnlJegyek, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlKoncertek, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(27, 27, 27)
                 .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlFeketeLayout.createSequentialGroup()
-                        .addComponent(lblKosar)
+                        .addGap(27, 27, 27)
+                        .addComponent(pnlExtrak, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlFeketeLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(pnlExtrak, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblKosar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))))
                 .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlFeketeLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
+                        .addGap(26, 26, 26)
                         .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jbtnMegse)
                             .addComponent(jbtnMegveszem))
-                        .addContainerGap(22, Short.MAX_VALUE))
+                        .addContainerGap(30, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFeketeLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblLink)
-                        .addGap(16, 16, 16))))
+                        .addGap(25, 25, 25))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -495,6 +544,9 @@ public class KoncertJegy extends javax.swing.JFrame {
         }else if ((koncertIndex == 4)||(koncertIndex == 5)){
             jegyAlapar = 6500;
         }
+        
+        
+        
         
 //        szamitasKiirasKosar(){
 //            vegsoAr = jegyAlapar + helySzorzo + extrak;
@@ -584,7 +636,7 @@ public class KoncertJegy extends javax.swing.JFrame {
 
     private void cmbxKoncertItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbxKoncertItemStateChanged
         
-        String koncert = "";
+        //String koncert = "";
         String koncertValaszt=cmbxKoncert.getModel().getSelectedItem().toString();
         koncert = koncertValaszt;
         
@@ -643,6 +695,20 @@ public class KoncertJegy extends javax.swing.JFrame {
         
     }//GEN-LAST:event_rbtnBteraszItemStateChanged
 
+    private void cbxBelepesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxBelepesItemStateChanged
+        
+        if (cbxBelepes.isSelected()){
+            extraBelepes=System.lineSeparator()+"Belépés a kapunyitás előtt";
+            extraBelepesAr+=1500;
+        }else{
+            extraBelepes="";
+            extraBelepesAr-=1500;
+        }
+                
+    }//GEN-LAST:event_cbxBelepesItemStateChanged
+
+    
+    
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -685,6 +751,9 @@ public class KoncertJegy extends javax.swing.JFrame {
     private javax.swing.JCheckBox cbxBelepes;
     private javax.swing.JCheckBox cbxBeszelgetes;
     private javax.swing.JComboBox<String> cmbxKoncert;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jbtnMegse;
