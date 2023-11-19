@@ -5,6 +5,7 @@
 package koncertjegy;
 
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 
 /**
  *
@@ -87,7 +88,6 @@ public class KoncertJegy extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtaKosar = new javax.swing.JTextArea();
-        lblKosar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("KoncertjegyVásárlás");
@@ -111,6 +111,7 @@ public class KoncertJegy extends javax.swing.JFrame {
         rbtnKuzdoter.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 rbtnKuzdoterItemStateChanged(evt);
+                helyKijelolesEngedely(evt);
             }
         });
 
@@ -123,6 +124,7 @@ public class KoncertJegy extends javax.swing.JFrame {
         rbtnVip.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 rbtnVipItemStateChanged(evt);
+                helyKijelolesEngedely(evt);
             }
         });
 
@@ -135,6 +137,7 @@ public class KoncertJegy extends javax.swing.JFrame {
         rbtnJterasz.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 rbtnJteraszItemStateChanged(evt);
+                helyKijelolesEngedely(evt);
             }
         });
 
@@ -147,6 +150,7 @@ public class KoncertJegy extends javax.swing.JFrame {
         rbtnBterasz.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 rbtnBteraszItemStateChanged(evt);
+                helyKijelolesEngedely(evt);
             }
         });
 
@@ -159,7 +163,7 @@ public class KoncertJegy extends javax.swing.JFrame {
                 .addGroup(pnlJegyekLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rbtnKuzdoter)
                     .addComponent(rbtnVip))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(pnlJegyekLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rbtnBterasz)
                     .addComponent(rbtnJterasz))
@@ -188,7 +192,7 @@ public class KoncertJegy extends javax.swing.JFrame {
         pnlKoncertek.setToolTipText("");
 
         cmbxKoncert.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
-        cmbxKoncert.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- Válasszon Koncertet! -", "11. 22. - Hakumba", "11. 25. - Analóg Balaton", "11. 28. - Ivan & the Parazol", "11. 30. - Fiúk", "12. 02. - Csakneked Kislány", "12. 08. - Bohémian Betyars", "12. 15. - Hiperkarma" }));
+        cmbxKoncert.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- Válassz Koncertet! -", "11. 22. - Hakumba", "11. 25. - Analóg Balaton", "11. 28. - Ivan & the Parazol", "11. 30. - Fiúk", "12. 02. - Csakneked Kislány", "12. 08. - Bohémian Betyars", "12. 15. - Hiperkarma" }));
         cmbxKoncert.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbxKoncert.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -227,7 +231,7 @@ public class KoncertJegy extends javax.swing.JFrame {
                 .addGroup(pnlKoncertekLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblKoncertek, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlKoncertekLayout.createSequentialGroup()
-                        .addGap(0, 14, Short.MAX_VALUE)
+                        .addGap(0, 7, Short.MAX_VALUE)
                         .addGroup(pnlKoncertekLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(pnlKoncertekLayout.createSequentialGroup()
                                 .addComponent(lblMennyiseg)
@@ -315,7 +319,7 @@ public class KoncertJegy extends javax.swing.JFrame {
                             .addComponent(cbxBelepes)
                             .addComponent(cbxBar)
                             .addComponent(cbxAfterparty))))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         pnlExtrakLayout.setVerticalGroup(
             pnlExtrakLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -368,11 +372,11 @@ public class KoncertJegy extends javax.swing.JFrame {
             pnlLilaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlLilaLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addComponent(lblKep)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnlLilaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblCim, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblAlcim, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addComponent(lblKep, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(49, 49, 49)
+                .addGroup(pnlLilaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblCim)
+                    .addComponent(lblAlcim))
                 .addContainerGap())
         );
         pnlLilaLayout.setVerticalGroup(
@@ -456,10 +460,10 @@ public class KoncertJegy extends javax.swing.JFrame {
         );
         pnlPirosLayout.setVerticalGroup(
             pnlPirosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlPirosLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPirosLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pnlElmult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         lblLink.setForeground(new java.awt.Color(255, 255, 255));
@@ -490,21 +494,17 @@ public class KoncertJegy extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                 .addContainerGap())
         );
-
-        lblKosar.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
-        lblKosar.setForeground(new java.awt.Color(255, 255, 255));
-        lblKosar.setText("Kosaram:");
 
         javax.swing.GroupLayout pnlFeketeLayout = new javax.swing.GroupLayout(pnlFekete);
         pnlFekete.setLayout(pnlFeketeLayout);
@@ -517,58 +517,54 @@ public class KoncertJegy extends javax.swing.JFrame {
                     .addComponent(pnlExtrak, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblLink, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pnlKoncertek, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlFeketeLayout.createSequentialGroup()
+                        .addGap(18, 18, Short.MAX_VALUE)
                         .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pnlJegyek, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblKosar))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(pnlFeketeLayout.createSequentialGroup()
-                        .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFeketeLayout.createSequentialGroup()
+                                .addComponent(lblossz)
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFeketeLayout.createSequentialGroup()
+                                .addComponent(jbtnMegveszem)
+                                .addGap(9, 9, 9)))
+                        .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(pnlFeketeLayout.createSequentialGroup()
-                                .addGap(54, 54, 54)
-                                .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(pnlFeketeLayout.createSequentialGroup()
-                                        .addComponent(lblossz)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(lblVegosszeg, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblFt))
-                                    .addGroup(pnlFeketeLayout.createSequentialGroup()
-                                        .addComponent(jbtnMegveszem)
-                                        .addGap(19, 19, 19)
-                                        .addComponent(jbtnMegse))))
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 25, Short.MAX_VALUE))))
+                                .addComponent(lblVegosszeg, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblFt))
+                            .addComponent(jbtnMegse))
+                        .addGap(33, 33, 33))
+                    .addGroup(pnlFeketeLayout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(pnlJegyek, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pnlFeketeLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlFeketeLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlLila, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(pnlLila, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 8, Short.MAX_VALUE))
         );
         pnlFeketeLayout.setVerticalGroup(
             pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlFeketeLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
+                .addComponent(pnlLila, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pnlPiros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlFeketeLayout.createSequentialGroup()
-                        .addComponent(pnlLila, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(pnlPiros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(pnlJegyek, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pnlKoncertek, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(lblKosar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlFeketeLayout.createSequentialGroup()
+                        .addComponent(pnlKoncertek, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
-                        .addComponent(pnlExtrak, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFeketeLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)))
+                        .addComponent(pnlExtrak, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlFeketeLayout.createSequentialGroup()
+                        .addComponent(pnlJegyek, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblFt, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblossz)
@@ -585,8 +581,7 @@ public class KoncertJegy extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(9, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(pnlFekete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
@@ -725,20 +720,20 @@ public class KoncertJegy extends javax.swing.JFrame {
             hely = "";
         }
         
-        if (rbtnKuzdoter.isEnabled()){
-            cbxBelepes.setEnabled(true);
-            cbxBeszelgetes.setEnabled(true);
-            if (rbtnNem.isSelected()){
-                cbxBar.setEnabled(false);
-                cbxAfterparty.setEnabled(false);
-            }else {
-                cbxBar.setEnabled(true);
-                cbxAfterparty.setEnabled(true);
-            }
-        }else{
-            cbxBelepes.setEnabled(false);
-            cbxBeszelgetes.setEnabled(false);
-        }
+//        if (rbtnKuzdoter.isEnabled()){
+//            cbxBelepes.setEnabled(true);
+//            cbxBeszelgetes.setEnabled(true);
+//            if (rbtnNem.isSelected()){
+//                cbxBar.setEnabled(false);
+//                cbxAfterparty.setEnabled(false);
+//            }else {
+//                cbxBar.setEnabled(true);
+//                cbxAfterparty.setEnabled(true);
+//            }
+//        }else{
+//            cbxBelepes.setEnabled(false);
+//            cbxBeszelgetes.setEnabled(false);
+//        }
         
 
         //txtaKosar.setText("Hely: " + hely);
@@ -807,20 +802,20 @@ public class KoncertJegy extends javax.swing.JFrame {
             hely = "";
         }
         
-        if (rbtnJterasz.isEnabled()){
-            cbxBelepes.setEnabled(true);
-            cbxBeszelgetes.setEnabled(true);
-            if (rbtnNem.isSelected()){
-                cbxBar.setEnabled(false);
-                cbxAfterparty.setEnabled(false);
-            }else {
-                cbxBar.setEnabled(true);
-                cbxAfterparty.setEnabled(true);
-            }
-        }else{
-            cbxBelepes.setEnabled(false);
-            cbxBeszelgetes.setEnabled(false);
-        }
+//        if (rbtnJterasz.isEnabled()){
+//            cbxBelepes.setEnabled(true);
+//            cbxBeszelgetes.setEnabled(true);
+//            if (rbtnNem.isSelected()){
+//                cbxBar.setEnabled(false);
+//                cbxAfterparty.setEnabled(false);
+//            }else {
+//                cbxBar.setEnabled(true);
+//                cbxAfterparty.setEnabled(true);
+//            }
+//        }else{
+//            cbxBelepes.setEnabled(false);
+//            cbxBeszelgetes.setEnabled(false);
+//        }
 
         //txtaKosar.setText("Hely: " + hely);
         osszegzesKiirasKosar();
@@ -839,20 +834,20 @@ public class KoncertJegy extends javax.swing.JFrame {
             hely = "";
         }
         
-        if (rbtnVip.isEnabled()){
-            cbxBelepes.setEnabled(true);
-            cbxBeszelgetes.setEnabled(true);
-            if (rbtnNem.isSelected()){
-                cbxBar.setEnabled(false);
-                cbxAfterparty.setEnabled(false);
-            }else {
-                cbxBar.setEnabled(true);
-                cbxAfterparty.setEnabled(true);
-            }
-        }else{
-            cbxBelepes.setEnabled(false);
-            cbxBeszelgetes.setEnabled(false);
-        }
+//        if (rbtnVip.isEnabled()){
+//            cbxBelepes.setEnabled(true);
+//            cbxBeszelgetes.setEnabled(true);
+//            if (rbtnNem.isSelected()){
+//                cbxBar.setEnabled(false);
+//                cbxAfterparty.setEnabled(false);
+//            }else {
+//                cbxBar.setEnabled(true);
+//                cbxAfterparty.setEnabled(true);
+//            }
+//        }else{
+//            cbxBelepes.setEnabled(false);
+//            cbxBeszelgetes.setEnabled(false);
+//        }
         
         //txtaKosar.setText("Hely: " + hely);
         osszegzesKiirasKosar();
@@ -871,20 +866,20 @@ public class KoncertJegy extends javax.swing.JFrame {
             hely = "";
         }
         
-        if (rbtnBterasz.isEnabled()){
-            cbxBelepes.setEnabled(true);
-            cbxBeszelgetes.setEnabled(true);
-            if (rbtnNem.isSelected()){
-                cbxBar.setEnabled(false);
-                cbxAfterparty.setEnabled(false);
-            }else {
-                cbxBar.setEnabled(true);
-                cbxAfterparty.setEnabled(true);
-            }
-        }else{
-            cbxBelepes.setEnabled(false);
-            cbxBeszelgetes.setEnabled(false);
-        }
+//        if (rbtnBterasz.isEnabled()){
+//            cbxBelepes.setEnabled(true);
+//            cbxBeszelgetes.setEnabled(true);
+//            if (rbtnNem.isSelected()){
+//                cbxBar.setEnabled(false);
+//                cbxAfterparty.setEnabled(false);
+//            }else {
+//                cbxBar.setEnabled(true);
+//                cbxAfterparty.setEnabled(true);
+//            }
+//        }else{
+//            cbxBelepes.setEnabled(false);
+//            cbxBeszelgetes.setEnabled(false);
+//        }
 
         //txtaKosar.setText("Hely: " + hely);
         osszegzesKiirasKosar();
@@ -933,6 +928,34 @@ public class KoncertJegy extends javax.swing.JFrame {
     osszegzesKiirasKosar();    
     osszegzesKiirasVegosszeg();
     }//GEN-LAST:event_cbxAfterpartyItemStateChanged
+
+    private void helyKijelolesEngedely(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_helyKijelolesEngedely
+        
+        JRadioButton rbt = (JRadioButton) evt.getSource();
+        
+        if (rbt.isEnabled()){
+            cbxBelepes.setEnabled(true);
+            cbxBeszelgetes.setEnabled(true);
+            elmultalMar18();
+        }else{
+            cbxBelepes.setEnabled(false);
+            cbxBeszelgetes.setEnabled(false);
+            elmultalMar18();
+        }
+        
+        
+        
+    }//GEN-LAST:event_helyKijelolesEngedely
+
+    private void elmultalMar18() {
+        if (rbtnNem.isSelected()){
+            cbxBar.setEnabled(false);
+            cbxAfterparty.setEnabled(false);
+        }else {
+            cbxBar.setEnabled(true);
+            cbxAfterparty.setEnabled(true);
+        }
+    }
 
     
     private void osszegzesKiirasKosar(){
@@ -1003,7 +1026,6 @@ public class KoncertJegy extends javax.swing.JFrame {
     private javax.swing.JLabel lblHely;
     private javax.swing.JLabel lblKep;
     private javax.swing.JLabel lblKoncertek;
-    private javax.swing.JLabel lblKosar;
     private javax.swing.JLabel lblLink;
     private javax.swing.JLabel lblMennyiseg;
     private javax.swing.JLabel lblVegosszeg;
