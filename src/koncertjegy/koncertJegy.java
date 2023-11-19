@@ -12,19 +12,35 @@ import javax.swing.JOptionPane;
  */
 public class KoncertJegy extends javax.swing.JFrame {
 
-    int jegyAlapar = 1;
+    int jegyAlapar = -1;
     double helySzorzo, vegsoAr;
-    int extrak, db;
+    int extrak, dbAr;
     String koncert = "";
+    
     int extraBelepesAr=0;
+    int extraBarAr=0;
+    int extraBeszelgetesAr=0;
+    int extraAfterAr=0;
     String extraBelepes="";
-    String nevExtrak="";
+    String extraBar="";
+    String extraBeszelgetes="";
+    String extraAfter="";
+    
+    //String nevExtrak="";
+    String osszegzes="";
+    String hely="";
+    String db="";
     
     public KoncertJegy() {
         initComponents();
         
+        
+        jegyAlapar = 4500;
         helySzorzo = 1;
-        jegyAlapar = 0;
+        
+        //extrak=extraBelepesAr+extraBarAr+extraBeszelgetesAr+extraAfterAr;
+        dbAr=1;
+        
         
     }
 
@@ -47,7 +63,6 @@ public class KoncertJegy extends javax.swing.JFrame {
         lblKoncertek = new javax.swing.JLabel();
         lblMennyiseg = new javax.swing.JLabel();
         spnrMennyiseg = new javax.swing.JSpinner();
-        lblKosar = new javax.swing.JLabel();
         pnlExtrak = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         cbxBar = new javax.swing.JCheckBox();
@@ -60,21 +75,24 @@ public class KoncertJegy extends javax.swing.JFrame {
         lblCim = new javax.swing.JLabel();
         lblAlcim = new javax.swing.JLabel();
         lblKep = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txtaKosar = new javax.swing.JTextArea();
         pnlPiros = new javax.swing.JPanel();
         pnlElmult = new javax.swing.JPanel();
         lblElmult = new javax.swing.JLabel();
         rbtnIgen = new javax.swing.JRadioButton();
         rbtnNem = new javax.swing.JRadioButton();
         lblLink = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblossz = new javax.swing.JLabel();
+        lblVegosszeg = new javax.swing.JLabel();
+        lblFt = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtaKosar = new javax.swing.JTextArea();
+        lblKosar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("KoncertjegyVásárlás");
         setBackground(new java.awt.Color(209, 253, 231));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         pnlFekete.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -88,6 +106,8 @@ public class KoncertJegy extends javax.swing.JFrame {
         rbtnKuzdoter.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         rbtnKuzdoter.setForeground(new java.awt.Color(255, 255, 255));
         rbtnKuzdoter.setText("Küzdőtér");
+        rbtnKuzdoter.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        rbtnKuzdoter.setEnabled(false);
         rbtnKuzdoter.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 rbtnKuzdoterItemStateChanged(evt);
@@ -98,6 +118,8 @@ public class KoncertJegy extends javax.swing.JFrame {
         rbtnVip.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         rbtnVip.setForeground(new java.awt.Color(255, 255, 255));
         rbtnVip.setText("VIP lelátó");
+        rbtnVip.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        rbtnVip.setEnabled(false);
         rbtnVip.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 rbtnVipItemStateChanged(evt);
@@ -108,6 +130,8 @@ public class KoncertJegy extends javax.swing.JFrame {
         rbtnJterasz.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         rbtnJterasz.setForeground(new java.awt.Color(255, 255, 255));
         rbtnJterasz.setText("Jobb terasz");
+        rbtnJterasz.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        rbtnJterasz.setEnabled(false);
         rbtnJterasz.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 rbtnJteraszItemStateChanged(evt);
@@ -118,6 +142,8 @@ public class KoncertJegy extends javax.swing.JFrame {
         rbtnBterasz.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         rbtnBterasz.setForeground(new java.awt.Color(255, 255, 255));
         rbtnBterasz.setText("Bal terasz");
+        rbtnBterasz.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        rbtnBterasz.setEnabled(false);
         rbtnBterasz.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 rbtnBteraszItemStateChanged(evt);
@@ -162,7 +188,8 @@ public class KoncertJegy extends javax.swing.JFrame {
         pnlKoncertek.setToolTipText("");
 
         cmbxKoncert.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
-        cmbxKoncert.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- Válasszon Koncertet! -", "11. 20. - Hakumba", "11. 21. - Analóg Balaton", "11. 22. - Ivan & the Parazol", "11. 23. - Fiúk", "11. 24. - Csakneked Kislány", "11. 25. - Bohémian Betyars", "11. 26. - Hiperkarma" }));
+        cmbxKoncert.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- Válasszon Koncertet! -", "11. 22. - Hakumba", "11. 25. - Analóg Balaton", "11. 28. - Ivan & the Parazol", "11. 30. - Fiúk", "12. 02. - Csakneked Kislány", "12. 08. - Bohémian Betyars", "12. 15. - Hiperkarma" }));
+        cmbxKoncert.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbxKoncert.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbxKoncertItemStateChanged(evt);
@@ -183,6 +210,8 @@ public class KoncertJegy extends javax.swing.JFrame {
         lblMennyiseg.setText("Jegyek mennyisége:");
 
         spnrMennyiseg.setModel(new javax.swing.SpinnerNumberModel(1, 1, 5, 1));
+        spnrMennyiseg.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        spnrMennyiseg.setEnabled(false);
         spnrMennyiseg.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 spnrMennyisegStateChanged(evt);
@@ -221,10 +250,6 @@ public class KoncertJegy extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        lblKosar.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
-        lblKosar.setForeground(new java.awt.Color(255, 255, 255));
-        lblKosar.setText("Kosaram:");
-
         pnlExtrak.setBackground(new java.awt.Color(0, 0, 0));
 
         jLabel8.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
@@ -234,6 +259,7 @@ public class KoncertJegy extends javax.swing.JFrame {
         cbxBar.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         cbxBar.setForeground(new java.awt.Color(255, 255, 255));
         cbxBar.setText("Korlátlan fogyasztás a bárban (18+)");
+        cbxBar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbxBar.setEnabled(false);
         cbxBar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -244,11 +270,19 @@ public class KoncertJegy extends javax.swing.JFrame {
         cbxAfterparty.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         cbxAfterparty.setForeground(new java.awt.Color(255, 255, 255));
         cbxAfterparty.setText("AfterParty részvétel (18+)");
+        cbxAfterparty.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbxAfterparty.setEnabled(false);
+        cbxAfterparty.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxAfterpartyItemStateChanged(evt);
+            }
+        });
 
         cbxBelepes.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         cbxBelepes.setForeground(new java.awt.Color(255, 255, 255));
         cbxBelepes.setText("Belépés kapunyitás előtt");
+        cbxBelepes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cbxBelepes.setEnabled(false);
         cbxBelepes.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbxBelepesItemStateChanged(evt);
@@ -258,6 +292,13 @@ public class KoncertJegy extends javax.swing.JFrame {
         cbxBeszelgetes.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         cbxBeszelgetes.setForeground(new java.awt.Color(255, 255, 255));
         cbxBeszelgetes.setText("Rövid beszélgetés a zenekarokkal");
+        cbxBeszelgetes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cbxBeszelgetes.setEnabled(false);
+        cbxBeszelgetes.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxBeszelgetesItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlExtrakLayout = new javax.swing.GroupLayout(pnlExtrak);
         pnlExtrak.setLayout(pnlExtrakLayout);
@@ -347,10 +388,6 @@ public class KoncertJegy extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        txtaKosar.setColumns(20);
-        txtaKosar.setRows(5);
-        jScrollPane2.setViewportView(txtaKosar);
-
         pnlPiros.setBackground(new java.awt.Color(204, 0, 0));
 
         pnlElmult.setBackground(new java.awt.Color(204, 0, 0));
@@ -365,6 +402,7 @@ public class KoncertJegy extends javax.swing.JFrame {
         rbtnIgen.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         rbtnIgen.setForeground(new java.awt.Color(255, 255, 255));
         rbtnIgen.setText("Igen");
+        rbtnIgen.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         rbtnIgen.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 rbtnIgenItemStateChanged(evt);
@@ -376,6 +414,7 @@ public class KoncertJegy extends javax.swing.JFrame {
         rbtnNem.setForeground(new java.awt.Color(255, 255, 255));
         rbtnNem.setSelected(true);
         rbtnNem.setText("Nem");
+        rbtnNem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         rbtnNem.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 rbtnNemItemStateChanged(evt);
@@ -424,17 +463,48 @@ public class KoncertJegy extends javax.swing.JFrame {
         );
 
         lblLink.setForeground(new java.awt.Color(255, 255, 255));
-        lblLink.setText("További információ a szabályzatunkról");
+        lblLink.setText("<html><a href=\"link\"> További információ a szabályzatunkról</a></html>");
 
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Végösszeg: ");
+        lblossz.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        lblossz.setForeground(new java.awt.Color(255, 255, 255));
+        lblossz.setText("Végösszeg: ");
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("0");
+        lblVegosszeg.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        lblVegosszeg.setForeground(new java.awt.Color(255, 255, 255));
+        lblVegosszeg.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblVegosszeg.setText("0");
 
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Ft");
+        lblFt.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        lblFt.setForeground(new java.awt.Color(255, 255, 255));
+        lblFt.setText("Ft");
+
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true), "Kosaram: ", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Georgia", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+
+        txtaKosar.setColumns(20);
+        txtaKosar.setRows(5);
+        jScrollPane2.setViewportView(txtaKosar);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        lblKosar.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        lblKosar.setForeground(new java.awt.Color(255, 255, 255));
+        lblKosar.setText("Kosaram:");
 
         javax.swing.GroupLayout pnlFeketeLayout = new javax.swing.GroupLayout(pnlFekete);
         pnlFekete.setLayout(pnlFeketeLayout);
@@ -442,95 +512,94 @@ public class KoncertJegy extends javax.swing.JFrame {
             pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(pnlPiros, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlFeketeLayout.createSequentialGroup()
-                .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlFeketeLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(pnlLila, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlFeketeLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
+                .addGap(20, 20, 20)
+                .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlExtrak, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblLink, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlKoncertek, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlFeketeLayout.createSequentialGroup()
                         .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pnlExtrak, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblLink)
-                            .addComponent(pnlKoncertek, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(pnlJegyek, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblKosar))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnlFeketeLayout.createSequentialGroup()
                         .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlFeketeLayout.createSequentialGroup()
                                 .addGap(54, 54, 54)
                                 .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jbtnMegveszem)
-                                    .addComponent(jLabel1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(pnlFeketeLayout.createSequentialGroup()
-                                .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jbtnMegse)
-                                    .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(pnlJegyek, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblKosar)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)))))
+                                    .addGroup(pnlFeketeLayout.createSequentialGroup()
+                                        .addComponent(lblossz)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lblVegosszeg, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblFt))
+                                    .addGroup(pnlFeketeLayout.createSequentialGroup()
+                                        .addComponent(jbtnMegveszem)
+                                        .addGap(19, 19, 19)
+                                        .addComponent(jbtnMegse))))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 25, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlFeketeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlLila, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pnlFeketeLayout.setVerticalGroup(
             pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlFeketeLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlLila, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnlPiros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnlJegyek, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlKoncertek, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(18, 18, 18)
+                .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlFeketeLayout.createSequentialGroup()
+                        .addComponent(pnlLila, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(pnlPiros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pnlJegyek, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnlKoncertek, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(lblKosar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlFeketeLayout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(pnlExtrak, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(1, 1, 1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlFeketeLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(lblKosar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))))
-                .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlFeketeLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jbtnMegse)
-                            .addComponent(jbtnMegveszem))
-                        .addContainerGap(30, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFeketeLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblLink)
-                        .addGap(25, 25, 25))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)))
+                .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblFt, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblossz)
+                    .addComponent(lblVegosszeg, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlFeketeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLink, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnMegveszem)
+                    .addComponent(jbtnMegse))
+                .addGap(21, 21, 21))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(9, Short.MAX_VALUE)
                 .addComponent(pnlFekete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
                 .addComponent(pnlFekete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmbxKoncertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbxKoncertActionPerformed
@@ -539,14 +608,51 @@ public class KoncertJegy extends javax.swing.JFrame {
         
         if (koncertIndex == 0){
             jegyAlapar = 0;
-        }else if ((koncertIndex == 1)||(koncertIndex == 2)||(koncertIndex == 3)){
+            rbtnKuzdoter.setEnabled(false);
+            rbtnBterasz.setEnabled(false);
+            rbtnJterasz.setEnabled(false);
+            rbtnVip.setEnabled(false);
+            spnrMennyiseg.setEnabled(false);
+//            cbxBelepes.setEnabled(false);
+//            cbxBeszelgetes.setEnabled(false);
+//            cbxAfterparty.setEnabled(false);
+        }else if ((koncertIndex == 1)||(koncertIndex == 2)||(koncertIndex == 3)||(koncertIndex == 4)){
             jegyAlapar = 4500;
-        }else if ((koncertIndex == 4)||(koncertIndex == 5)){
+            rbtnKuzdoter.setEnabled(true);
+            rbtnBterasz.setEnabled(true);
+            rbtnJterasz.setEnabled(true);
+            rbtnVip.setEnabled(true);
+            spnrMennyiseg.setEnabled(true);
+//            cbxBelepes.setEnabled(true);
+//            cbxBeszelgetes.setEnabled(true);
+//            if (rbtnNem.isSelected()){
+//                cbxBar.setEnabled(false);
+//                cbxAfterparty.setEnabled(false);
+//            }else {
+//                cbxBar.setEnabled(true);
+//                cbxAfterparty.setEnabled(true);
+//        }
+        }else if ((koncertIndex == 5)||(koncertIndex == 6)||(koncertIndex == 7)){
             jegyAlapar = 6500;
+            rbtnKuzdoter.setEnabled(true);
+            rbtnBterasz.setEnabled(true);
+            rbtnJterasz.setEnabled(true);
+            rbtnVip.setEnabled(true);
+            spnrMennyiseg.setEnabled(true);
+//            cbxBelepes.setEnabled(true);
+//            cbxBeszelgetes.setEnabled(true);
+//            if (rbtnNem.isSelected()){
+//                cbxBar.setEnabled(false);
+//                cbxAfterparty.setEnabled(false);
+//            }else {
+//                cbxBar.setEnabled(true);
+//                cbxAfterparty.setEnabled(true);
+//        }
         }
         
         
-        
+        osszegzesKiirasKosar();
+        osszegzesKiirasVegosszeg();
         
 //        szamitasKiirasKosar(){
 //            vegsoAr = jegyAlapar + helySzorzo + extrak;
@@ -559,13 +665,23 @@ public class KoncertJegy extends javax.swing.JFrame {
         
     }//GEN-LAST:event_cmbxKoncertActionPerformed
 
+//    private void extrakSzamitasa() {
+//        int extraBelepesAr=0;
+//        int extraBarAr=0;
+//        int extraBeszelgetesAr=0;
+//        int extraAfterAr=0;
+//        extrak=extraBelepesAr+extraBarAr+extraBeszelgetesAr+extraAfterAr;
+//    }
+//    
+//   
     private void jbtnMegseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtnMegseMouseClicked
         System.exit(0); 
     }//GEN-LAST:event_jbtnMegseMouseClicked
 
     private void jbtnMegveszemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtnMegveszemMouseClicked
         int ikonTipus = JOptionPane.INFORMATION_MESSAGE; //
-        JOptionPane.showMessageDialog(rootPane, "A jegyedet a korábban megadott e-mail címedere elküldtük!", "Jegyvásárlás", 1);
+        JOptionPane.showMessageDialog(null, "Köszönjük a vásárlást!"+System.lineSeparator()+"A jegyedet a korábban megadott e-mail címedere elküldtük!"+System.lineSeparator()+"Hamarosan találkozunk!", "Jegyvásárlás visszaigazolása", 1);
+        System.exit(0);
     }//GEN-LAST:event_jbtnMegveszemMouseClicked
 
     private void rbtnIgenItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbtnIgenItemStateChanged
@@ -582,14 +698,14 @@ public class KoncertJegy extends javax.swing.JFrame {
 
     private void rbtnNemItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbtnNemItemStateChanged
         
-        if (rbtnNem.isSelected()){
-            cbxBar.setEnabled(false);
-            cbxAfterparty.setEnabled(false);
-        }else {
-            cbxBar.setEnabled(true);
-            cbxAfterparty.setEnabled(true);
-        }
-        
+//        if (rbtnNem.isSelected()){
+//            cbxBar.setEnabled(false);
+//            cbxAfterparty.setEnabled(false);
+//        }else {
+//            cbxBar.setEnabled(true);
+//            cbxAfterparty.setEnabled(true);
+//        }
+//        
     }//GEN-LAST:event_rbtnNemItemStateChanged
 
     private void rbtnKuzdoterItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbtnKuzdoterItemStateChanged
@@ -599,7 +715,7 @@ public class KoncertJegy extends javax.swing.JFrame {
 //        String kuzdoterValaszt=rbtnKuzdoter.getModel().getSelectedItem().toString();
 //        kuzdoter = kuzdoterValaszt;
         
-        String hely = "";
+        //String hely = "";
 
         if (rbtnKuzdoter.isSelected()){
            
@@ -609,9 +725,25 @@ public class KoncertJegy extends javax.swing.JFrame {
             hely = "";
         }
         
-
-        txtaKosar.setText("Hely: " + hely);
+        if (rbtnKuzdoter.isEnabled()){
+            cbxBelepes.setEnabled(true);
+            cbxBeszelgetes.setEnabled(true);
+            if (rbtnNem.isSelected()){
+                cbxBar.setEnabled(false);
+                cbxAfterparty.setEnabled(false);
+            }else {
+                cbxBar.setEnabled(true);
+                cbxAfterparty.setEnabled(true);
+            }
+        }else{
+            cbxBelepes.setEnabled(false);
+            cbxBeszelgetes.setEnabled(false);
+        }
         
+
+        //txtaKosar.setText("Hely: " + hely);
+        osszegzesKiirasKosar();
+        osszegzesKiirasVegosszeg();
     }//GEN-LAST:event_rbtnKuzdoterItemStateChanged
 
     private void spnrMennyisegStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnrMennyisegStateChanged
@@ -620,18 +752,35 @@ public class KoncertJegy extends javax.swing.JFrame {
         
         int mennyiseg=0;
         mennyiseg=spnrMennyiseg.getModel().getValue().hashCode();
+        db=" - "+mennyiseg+" db";
+        dbAr=mennyiseg;
+        
+        //dbAr=(int)spnrMennyiseg.getValue();
+        
+        //dbAr=jegyAlapar*mennyiseg;
        
         
        
         
-        txtaKosar.setText("Jegy db: " + (mennyiseg));
+        //txtaKosar.setText("Jegy db: " + (mennyiseg));
         
         // MEGKERESNI hogy double helyett int legyen, de jól és hogy hogyan !!!!!!
-        
+        osszegzesKiirasKosar();
+        osszegzesKiirasVegosszeg();
     }//GEN-LAST:event_spnrMennyisegStateChanged
 
     private void cbxBarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxBarActionPerformed
-        // TODO add your handling code here:
+        
+        if (cbxBar.isSelected()){
+            extraBar=System.lineSeparator()+"Korlátlan italfogyasztás a bárban (18+)";
+            extraBarAr+=5000;
+        }else{
+            extraBar="";
+            extraBarAr-=5000;
+        }
+        
+    osszegzesKiirasKosar();        
+    osszegzesKiirasVegosszeg();    
     }//GEN-LAST:event_cbxBarActionPerformed
 
     private void cmbxKoncertItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbxKoncertItemStateChanged
@@ -640,13 +789,15 @@ public class KoncertJegy extends javax.swing.JFrame {
         String koncertValaszt=cmbxKoncert.getModel().getSelectedItem().toString();
         koncert = koncertValaszt;
         
-        txtaKosar.setText("Koncert: " + koncert);
-        
+        //txtaKosar.setText("Koncert: " + koncert);
+        osszegzesKiirasKosar();
+        osszegzesKiirasVegosszeg();
     }//GEN-LAST:event_cmbxKoncertItemStateChanged
 
     private void rbtnJteraszItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbtnJteraszItemStateChanged
+        helySzorzo=1.25;
         
-        String hely = "";
+        //String hely = "";
 
         if (rbtnJterasz.isSelected()){
            
@@ -656,14 +807,29 @@ public class KoncertJegy extends javax.swing.JFrame {
             hely = "";
         }
         
+        if (rbtnJterasz.isEnabled()){
+            cbxBelepes.setEnabled(true);
+            cbxBeszelgetes.setEnabled(true);
+            if (rbtnNem.isSelected()){
+                cbxBar.setEnabled(false);
+                cbxAfterparty.setEnabled(false);
+            }else {
+                cbxBar.setEnabled(true);
+                cbxAfterparty.setEnabled(true);
+            }
+        }else{
+            cbxBelepes.setEnabled(false);
+            cbxBeszelgetes.setEnabled(false);
+        }
 
-        txtaKosar.setText("Hely: " + hely);
-        
+        //txtaKosar.setText("Hely: " + hely);
+        osszegzesKiirasKosar();
+        osszegzesKiirasVegosszeg();
     }//GEN-LAST:event_rbtnJteraszItemStateChanged
 
     private void rbtnVipItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbtnVipItemStateChanged
-        
-        String hely = "";
+        helySzorzo=2;
+        //String hely = "";
 
         if (rbtnVip.isSelected()){
            
@@ -673,14 +839,29 @@ public class KoncertJegy extends javax.swing.JFrame {
             hely = "";
         }
         
-
-        txtaKosar.setText("Hely: " + hely);
+        if (rbtnVip.isEnabled()){
+            cbxBelepes.setEnabled(true);
+            cbxBeszelgetes.setEnabled(true);
+            if (rbtnNem.isSelected()){
+                cbxBar.setEnabled(false);
+                cbxAfterparty.setEnabled(false);
+            }else {
+                cbxBar.setEnabled(true);
+                cbxAfterparty.setEnabled(true);
+            }
+        }else{
+            cbxBelepes.setEnabled(false);
+            cbxBeszelgetes.setEnabled(false);
+        }
         
+        //txtaKosar.setText("Hely: " + hely);
+        osszegzesKiirasKosar();
+        osszegzesKiirasVegosszeg();
     }//GEN-LAST:event_rbtnVipItemStateChanged
 
     private void rbtnBteraszItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbtnBteraszItemStateChanged
-        
-        String hely = "";
+        helySzorzo=1.25;
+        //String hely = "";
 
         if (rbtnBterasz.isSelected()){
            
@@ -690,9 +871,24 @@ public class KoncertJegy extends javax.swing.JFrame {
             hely = "";
         }
         
+        if (rbtnBterasz.isEnabled()){
+            cbxBelepes.setEnabled(true);
+            cbxBeszelgetes.setEnabled(true);
+            if (rbtnNem.isSelected()){
+                cbxBar.setEnabled(false);
+                cbxAfterparty.setEnabled(false);
+            }else {
+                cbxBar.setEnabled(true);
+                cbxAfterparty.setEnabled(true);
+            }
+        }else{
+            cbxBelepes.setEnabled(false);
+            cbxBeszelgetes.setEnabled(false);
+        }
 
-        txtaKosar.setText("Hely: " + hely);
-        
+        //txtaKosar.setText("Hely: " + hely);
+        osszegzesKiirasKosar();
+        osszegzesKiirasVegosszeg();
     }//GEN-LAST:event_rbtnBteraszItemStateChanged
 
     private void cbxBelepesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxBelepesItemStateChanged
@@ -704,11 +900,55 @@ public class KoncertJegy extends javax.swing.JFrame {
             extraBelepes="";
             extraBelepesAr-=1500;
         }
-                
+        
+    osszegzesKiirasKosar();
+    osszegzesKiirasVegosszeg();
     }//GEN-LAST:event_cbxBelepesItemStateChanged
 
+    private void cbxBeszelgetesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxBeszelgetesItemStateChanged
+        
+        if (cbxBeszelgetes.isSelected()){
+            extraBeszelgetes=System.lineSeparator()+"Rövid beszélgetés a zenekarokkal";
+            extraBeszelgetesAr+=3000;
+        }else{
+            extraBeszelgetes="";
+            extraBeszelgetesAr-=3000;
+        }
+        
+    osszegzesKiirasKosar();        
+    osszegzesKiirasVegosszeg();    
+        
+    }//GEN-LAST:event_cbxBeszelgetesItemStateChanged
+
+    private void cbxAfterpartyItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxAfterpartyItemStateChanged
+        
+        if (cbxAfterparty.isSelected()){
+            extraAfter=System.lineSeparator()+"AfterParty-n való részvétel (18+)";
+            extraAfterAr+=8000;
+        }else{
+            extraAfter="";
+            extraAfterAr-=8000;
+        }
+        
+    osszegzesKiirasKosar();    
+    osszegzesKiirasVegosszeg();
+    }//GEN-LAST:event_cbxAfterpartyItemStateChanged
+
     
+    private void osszegzesKiirasKosar(){
+        String kiKoncert="Választott koncert: "+System.lineSeparator()+koncert+db;
+        osszegzes=kiKoncert+System.lineSeparator()+"Hely: "+hely+System.lineSeparator()+"Extrák: "+System.lineSeparator()+extraBelepes+extraBar+extraBeszelgetes+extraAfter;
+        txtaKosar.setText(osszegzes);
+    }
     
+    private void osszegzesKiirasVegosszeg(){
+        extrak=extraBelepesAr+extraBarAr+extraBeszelgetesAr+extraAfterAr;
+        vegsoAr=jegyAlapar*helySzorzo+extrak;
+        vegsoAr*=dbAr;
+        System.out.println(vegsoAr);
+        lblVegosszeg.setText(vegsoAr+"");
+    }
+            
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -751,22 +991,23 @@ public class KoncertJegy extends javax.swing.JFrame {
     private javax.swing.JCheckBox cbxBelepes;
     private javax.swing.JCheckBox cbxBeszelgetes;
     private javax.swing.JComboBox<String> cmbxKoncert;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jbtnMegse;
     private javax.swing.JButton jbtnMegveszem;
     private javax.swing.JLabel lblAlcim;
     private javax.swing.JLabel lblCim;
     private javax.swing.JLabel lblElmult;
+    private javax.swing.JLabel lblFt;
     private javax.swing.JLabel lblHely;
     private javax.swing.JLabel lblKep;
     private javax.swing.JLabel lblKoncertek;
     private javax.swing.JLabel lblKosar;
     private javax.swing.JLabel lblLink;
     private javax.swing.JLabel lblMennyiseg;
+    private javax.swing.JLabel lblVegosszeg;
+    private javax.swing.JLabel lblossz;
     private javax.swing.JPanel pnlElmult;
     private javax.swing.JPanel pnlExtrak;
     private javax.swing.JPanel pnlFekete;
